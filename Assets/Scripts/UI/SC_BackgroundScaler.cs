@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// Source https://www.sharpcoderblog.com/blog/unity-3d-create-main-menu-with-ui-canvas 
+
 [ExecuteInEditMode]
 public class SC_BackgroundScaler : MonoBehaviour
 {

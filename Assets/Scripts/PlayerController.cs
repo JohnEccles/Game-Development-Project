@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+// Code adapted from this video tutorial https://www.youtube.com/watch?v=WIl6ysorTE0&t=414s
+// Used as another source https://www.youtube.com/watch?v=SyA4PPiXorI
+
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
@@ -80,11 +84,6 @@ public class Player : MonoBehaviour
 
         Debug.Log($"move: {moveDir}");
         Debug.Log($"look: {lookDir}");
-
-  
-
-
-
 
     }
 
