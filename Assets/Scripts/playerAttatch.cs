@@ -47,7 +47,7 @@ public class playerAttatch : MonoBehaviour
         }
 
         // Set scale to same one exit
-        player.transform.localScale = scale;
+        //player.transform.localScale = scale;
     }
 
 
