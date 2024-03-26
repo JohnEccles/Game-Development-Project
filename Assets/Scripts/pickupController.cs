@@ -56,7 +56,7 @@ public class pickupController : MonoBehaviour
 
     void moveObject() 
     {
-        if (Vector3.Distance(heldObj.transform.position, holdArea.position) > 0.1f) 
+        if (Vector3.Distance(heldObj.transform.position, holdArea.position) > heldObj.transform.localScale.magnitude ) 
         {
             Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
 
@@ -70,6 +70,7 @@ public class pickupController : MonoBehaviour
         Debug.Log("PICK OBJECT");
         if (pickObj.GetComponent<Rigidbody>()) 
         {
+            heldObj = pickObj;
             Debug.Log("OBJECT has RB");
 
             heldObjRB = pickObj.GetComponent<Rigidbody>();
@@ -77,11 +78,13 @@ public class pickupController : MonoBehaviour
             heldObjRB.drag = 10;
 
             heldObjRB.constraints = RigidbodyConstraints.FreezeRotation ;
-            
-            
 
-            heldObjRB.transform.parent = holdArea;
-            heldObj = pickObj;
+            heldObj.transform.SetParent(holdArea.transform);
+
+            // OG LAYOUT
+            //heldObjRB.transform.parent = holdArea;
+            //heldObj = pickObj; // MOVED TO TOP 
+
         }
 
 
