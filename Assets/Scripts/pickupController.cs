@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // tutorial from https://www.youtube.com/watch?v=6bFCQqabfzo 
 
@@ -19,19 +20,21 @@ public class pickupController : MonoBehaviour
     [SerializeField]
     private float pickupForce = 150.0f;
 
-    private bool isHeld;
     private bool wasPressed;
+    private bool wasReleased;
 
 
     private void Awake()
     {
         playerActions = new DefaultPlayerActions();
-        isHeld= false;
+        wasPressed= false;
         heldObj = null;
         wasPressed = false;
     }
     private void OnEnable()
     {
+        playerActions.Player.Interact.started += PickUp;
+
         playerActions.Player.Enable();
     }
 
@@ -43,48 +46,11 @@ public class pickupController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //isHeld = playerActions.Player.Interact.IsPressed();
-        isHeld = playerActions.Player.Interact.ReadValue<float>() != 0;
-
-        Debug.Log(isHeld);
-
-        // If player presses interact button
-        if (isHeld)
+        if (heldObj != null)
         {
-            //wasPressed = !wasPressed;
-            if (heldObj == null)
-            {
-                RaycastHit hit;
-
-                // Changed transform.postion and transform.TransformDirection to holdArea. ###
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
-                {
-                    // pickup object
-                    pickupObject(hit.transform.gameObject);
-
-                }
-
-
-            }
-            else
-            {
-                // drop object
-                dropObject();
-            }
-
-        }
-        else 
-        {
-            wasPressed = false;
-        }
-        
-        if (heldObj != null) 
-        { 
             // Move Object
             moveObject();
         }
-
-       
     }
 
 
@@ -132,6 +98,38 @@ public class pickupController : MonoBehaviour
 
         heldObj.transform.parent = null;
         heldObj = null;
+        
+    }
+
+    private void PickUp(InputAction.CallbackContext obj)
+    {
+        if (obj.started == true) // "== true" is just for readability
+        {
+            print("key E pressed");
+
+            //wasPressed = !wasPressed;
+            if (heldObj == null)
+            {
+               RaycastHit hit;
+
+               // Changed transform.postion and transform.TransformDirection to holdArea. ###
+               if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+               {
+                    // pickup object
+                    pickupObject(hit.transform.gameObject);
+
+               }
+
+
+            }
+            else
+            {
+                // drop object
+                dropObject();
+            }
+
+
+        }
         
     }
 
