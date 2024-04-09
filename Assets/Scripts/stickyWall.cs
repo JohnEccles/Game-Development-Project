@@ -32,7 +32,7 @@ public class stickyWall : MonoBehaviour
 
     private void OnEnable()
     {
-        playerActions.Player.Interact.started += releasePlayer;
+        playerActions.Player.Crouch.started += releasePlayer;
         move = playerActions.Player.Move;
         playerActions.Player.Enable();
     }
@@ -64,10 +64,10 @@ public class stickyWall : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other )
     {
 
-        if (other.GetComponent<Rigidbody>())
+        if (other.GetComponent<Rigidbody>() && other.CompareTag("Player"))
         {
             playerRB = other.attachedRigidbody;
 
@@ -84,7 +84,7 @@ public class stickyWall : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.GetComponent<Rigidbody>())
+        if (other.GetComponent<Rigidbody>() && other.CompareTag("Player"))
         {
             playerRB.useGravity = true;
 

@@ -29,7 +29,7 @@ public class stickyCelling : MonoBehaviour
 
     private void OnEnable()
     {
-        playerActions.Player.Interact.started += releasePlayer;
+        playerActions.Player.Crouch.started += releasePlayer;
         playerActions.Player.Enable();
     }
 
@@ -47,7 +47,11 @@ public class stickyCelling : MonoBehaviour
             // Makes player oreintation upsidedown but issues with LookAt for motion
             Vector3 direction = playerRB.velocity;
             direction.y = 0f;
-            playerRB.rotation = Quaternion.LookRotation(direction, lookDirection);
+            if (direction.sqrMagnitude > 0) 
+            {
+                playerRB.rotation = Quaternion.LookRotation(direction, lookDirection); 
+            }
+            
         }
 
 
@@ -62,7 +66,7 @@ public class stickyCelling : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.GetComponent<Rigidbody>())
+        if (other.GetComponent<Rigidbody>() && other.CompareTag("Player"))
         {
             playerRB = other.attachedRigidbody;
 
@@ -79,7 +83,7 @@ public class stickyCelling : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.GetComponent<Rigidbody>())
+        if (other.GetComponent<Rigidbody>() && other.CompareTag("Player") )
         {
             playerRB.useGravity = true;
 

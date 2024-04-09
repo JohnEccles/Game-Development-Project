@@ -112,7 +112,7 @@ public class ThirdPersonControler : MonoBehaviour
         {
             this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
-        else 
+        else if (onEarth)
         {   
             // Stop rotatin if no input
             rb.angularVelocity= Vector3.zero;
