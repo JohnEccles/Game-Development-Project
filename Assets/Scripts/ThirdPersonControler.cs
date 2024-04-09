@@ -32,6 +32,11 @@ public class ThirdPersonControler : MonoBehaviour
     public bool onWall;
     public bool release;
 
+
+    // ANIMATION
+    [SerializeField]
+    private Animator animator;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -70,6 +75,9 @@ public class ThirdPersonControler : MonoBehaviour
             // Vertical
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce * 3;
             Debug.Log($"{movementForce * 2}");
+
+            // Animation
+            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed );
         }
         // Climbing/Walking on a wall
         else if (onWall && !release)
@@ -95,6 +103,9 @@ public class ThirdPersonControler : MonoBehaviour
             // Vertical
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
 
+            // Animation
+            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed * 0.75f );
+
         }
 
        
@@ -117,6 +128,9 @@ public class ThirdPersonControler : MonoBehaviour
         { 
             rb.velocity = horisontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
+
+
+        
 
         LookAt();
     }
@@ -172,6 +186,10 @@ public class ThirdPersonControler : MonoBehaviour
             print("WALL LEAP!!!!");
             forceDirection -= move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * climbForce;
         }
+
+        // Animation
+        animator.SetTrigger("Jump");
+
     }
 
     private bool IsGrounded()

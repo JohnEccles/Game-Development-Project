@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 6465701088381632396}
   - component: {fileID: 3530467640057288724}
   - component: {fileID: 563649492668307667}
+  - component: {fileID: 9146783511777337051}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -238,8 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 30
   jumpForce: 200
+  climbForce: 0.5
   maxSpeed: 10
   playerCamera: {fileID: 0}
+  onEarth: 0
+  onWall: 0
+  release: 0
 --- !u!54 &3530467640057288724
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -290,3 +295,18 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!114 &9146783511777337051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144778795442910277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e820c3b4c4e77c4db8ddf5023ece629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdArea: {fileID: 0}
+  pickupRange: 10
+  pickupForce: 150

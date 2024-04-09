@@ -49,7 +49,13 @@ public class climbWall : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (release) { other.attachedRigidbody.useGravity = !other.attachedRigidbody.useGravity; }
+        if (release) 
+        { 
+            other.attachedRigidbody.useGravity = !other.attachedRigidbody.useGravity;
+            //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
+            playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
+        }
+        
 
     }
 
@@ -66,6 +72,7 @@ public class climbWall : MonoBehaviour
 
             // Makes Player upsidedown
             //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
+            playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
             thirdPersonControler.onWall = true;
 
 
