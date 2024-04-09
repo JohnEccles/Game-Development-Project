@@ -26,12 +26,14 @@ public class ThirdPersonControler : MonoBehaviour
 
     private bool isRunning;
 
+    public bool onEarth;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         playerActions = new DefaultPlayerActions();
         isRunning = false;
-
+        onEarth = true;
 
     }
 
@@ -80,11 +82,13 @@ public class ThirdPersonControler : MonoBehaviour
         forceDirection= Vector3.zero; // Stops Accleration after buttons not pressed
 
         // Check Jump
-        if (rb.velocity.y < 0f)     
+        
+        if (rb.velocity.y < 0f && rb.useGravity == true)     
         {
             // Player falls faster without effecting others in scene    
             rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime; 
         }
+        
 
         // Limmit Horizontal speed
         Vector3 horisontalVelocity = rb.velocity;
@@ -104,7 +108,7 @@ public class ThirdPersonControler : MonoBehaviour
         direction.y = 0f;
 
         // Check for player Input && change direction if so
-        if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
+        if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f && onEarth)
         {
             this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
