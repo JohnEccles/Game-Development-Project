@@ -18,8 +18,10 @@ public class ThirdPersonControler : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5f;
     [SerializeField]
+    private float climbForce = 0.5f;
+    [SerializeField]
     private float maxSpeed = 5f;
-    private Vector3 forceDirection= Vector3.zero;
+    private Vector3 forceDirection = Vector3.zero;
 
     [SerializeField]
     private Camera playerCamera;
@@ -27,6 +29,8 @@ public class ThirdPersonControler : MonoBehaviour
     private bool isRunning;
 
     public bool onEarth;
+    public bool onWall;
+    public bool release;
 
     private void Awake()
     {
@@ -58,7 +62,7 @@ public class ThirdPersonControler : MonoBehaviour
         // Checks if run key held down
         isRunning = playerActions.Player.Run.ReadValue<float>() > 0;
         //Debug.Log($"{isRunning}");
-        if (isRunning)
+        if (isRunning && onEarth)
         {
             // Horizontal
             
@@ -67,7 +71,23 @@ public class ThirdPersonControler : MonoBehaviour
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce * 3;
             Debug.Log($"{movementForce * 2}");
         }
-        else 
+        // Climbing/Walking on a wall
+        else if (onWall && !release)
+        {
+
+            // Horizontal
+            // Reads value from UserInput Move and adds value along with camera pos and movement force
+
+            // Camera controles direction allows for walking off wall if angled paralel
+            //forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * climbForce;
+
+            forceDirection += move.ReadValue<Vector2>().x * Vector3.left * climbForce;
+
+            // Vertical
+            forceDirection += Vector3.up * move.ReadValue<Vector2>().y * climbForce;
+
+        }
+        else
         { 
             // Horizontal
             // Reads value from UserInput Move and adds value along with camera pos and movement force
@@ -147,6 +167,11 @@ public class ThirdPersonControler : MonoBehaviour
         {
             forceDirection += Vector3.up * jumpForce;
         }
+        else if (onWall)
+        {
+            print("WALL LEAP!!!!");
+            forceDirection -= move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * climbForce;
+        }
     }
 
     private bool IsGrounded()
@@ -159,6 +184,8 @@ public class ThirdPersonControler : MonoBehaviour
         else
             return false;
     }
+
+
 
 
 

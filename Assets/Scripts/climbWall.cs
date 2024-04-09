@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
-public class stickyWall : MonoBehaviour
+public class climbWall : MonoBehaviour
 {
 
     // Get Player TPCC object and apply
@@ -21,6 +21,10 @@ public class stickyWall : MonoBehaviour
 
     [SerializeField]
     private Vector3 lookDirection;
+
+    private Vector3 forceDirection = Vector3.zero;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -43,24 +47,9 @@ public class stickyWall : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (playerRB) 
-        {
-            // Makes player oreintation upsidedown but issues with LookAt for motion
-            Vector3 direction = playerRB.velocity;
-            direction.y = 0f;
-            playerRB.rotation = Quaternion.LookRotation(direction, lookDirection);
-
-        }
-        
-
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (release) { other.attachedRigidbody.useGravity = true; }
+        if (release) { other.attachedRigidbody.useGravity = !other.attachedRigidbody.useGravity; }
 
     }
 
@@ -73,9 +62,11 @@ public class stickyWall : MonoBehaviour
 
             playerRB.useGravity = false;
 
+            //other.transform.SetParent(transform);
+
             // Makes Player upsidedown
-            //playerRB.rotation = Quaternion.LookRotation(transform.forward, Vector3.down);
-            thirdPersonControler.onEarth = false;
+            //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
+            thirdPersonControler.onWall = true;
 
 
         }
@@ -93,6 +84,8 @@ public class stickyWall : MonoBehaviour
             playerRB.rotation = Quaternion.LookRotation(direction, -lookDirection);
 
 
+            //other.transform.SetParent(null);
+
             // MUST BE LAST
             playerRB = null;
             
@@ -100,13 +93,13 @@ public class stickyWall : MonoBehaviour
         }
 
         release = false;
-        thirdPersonControler.onEarth = true;
+        thirdPersonControler.onWall = false;
 
     }
 
     private void releasePlayer(InputAction.CallbackContext obj) 
     { 
-        release = true;
+        release = !release;
     }
 
 }
