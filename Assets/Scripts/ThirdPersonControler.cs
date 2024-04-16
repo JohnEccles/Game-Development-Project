@@ -9,7 +9,8 @@ public class ThirdPersonControler : MonoBehaviour
 {
     // input
     private DefaultPlayerActions playerActions;
-    private InputAction move;
+
+    public InputAction move;
 
 
     private Rigidbody rb;
@@ -83,6 +84,9 @@ public class ThirdPersonControler : MonoBehaviour
         else if (onWall && !release)
         {
 
+            animator.ResetTrigger("Falling");
+            animator.SetTrigger("Grounded");
+
             // Horizontal
             // Reads value from UserInput Move and adds value along with camera pos and movement force
 
@@ -113,13 +117,17 @@ public class ThirdPersonControler : MonoBehaviour
         forceDirection= Vector3.zero; // Stops Accleration after buttons not pressed
 
         // Check Jump
-        
-        if (rb.velocity.y < 0f && rb.useGravity == true)     
+
+        if (rb.velocity.y < 0f && rb.useGravity == true)
         {
             // Player falls faster without effecting others in scene    
-            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime; 
+            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
+
+            //animator.SetTrigger("Falling");
+            //animator.ResetTrigger("Grounded");
         }
-        
+
+
 
         // Limmit Horizontal speed
         Vector3 horisontalVelocity = rb.velocity;
@@ -129,6 +137,20 @@ public class ThirdPersonControler : MonoBehaviour
             rb.velocity = horisontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
 
+        if (IsGrounded() && onEarth)
+        {
+            animator.ResetTrigger("Falling");
+            animator.SetTrigger("Grounded");
+        }
+        else if (!onEarth) 
+        {
+            animator.SetTrigger("Grounded");
+        }
+        else
+        {
+            animator.SetTrigger("Falling");
+            animator.ResetTrigger("Grounded");
+        }
 
         
 

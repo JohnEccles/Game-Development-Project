@@ -47,9 +47,14 @@ public class stickyCelling : MonoBehaviour
             // Makes player oreintation upsidedown but issues with LookAt for motion
             Vector3 direction = playerRB.velocity;
             direction.y = 0f;
-            if (direction.sqrMagnitude > 0) 
+            if (thirdPersonControler.move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
             {
-                playerRB.rotation = Quaternion.LookRotation(direction, lookDirection); 
+                playerRB.rotation = Quaternion.LookRotation(direction, lookDirection);
+            }
+            else 
+            {
+                // Stop rotatin if no input
+                playerRB.angularVelocity = Vector3.zero;
             }
             
         }
@@ -75,6 +80,8 @@ public class stickyCelling : MonoBehaviour
             // Makes Player upsidedown
             //playerRB.rotation = Quaternion.LookRotation(transform.forward, Vector3.down);
             thirdPersonControler.onEarth = false;
+
+            
 
 
         }
