@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class stickyCelling : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class stickyCelling : MonoBehaviour
             if (thirdPersonControler.move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
             {
                 playerRB.rotation = Quaternion.LookRotation(direction, lookDirection);
+                
             }
             else 
             {
@@ -79,6 +81,7 @@ public class stickyCelling : MonoBehaviour
 
             // Makes Player upsidedown
             //playerRB.rotation = Quaternion.LookRotation(transform.forward, Vector3.down);
+            playerRB.rotation =  Quaternion.LookRotation(transform.forward, Vector3.down);
             thirdPersonControler.onEarth = false;
 
             
@@ -89,7 +92,7 @@ public class stickyCelling : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
+        
         if (other.GetComponent<Rigidbody>() && other.CompareTag("Player") )
         {
             playerRB.useGravity = true;
@@ -97,13 +100,13 @@ public class stickyCelling : MonoBehaviour
             Vector3 direction = playerRB.velocity;
             direction.y = 0f;
             playerRB.rotation = Quaternion.LookRotation(direction, -lookDirection);
-
-
+            
             // MUST BE LAST
             playerRB = null;
             
 
         }
+        
 
         release = false;
         thirdPersonControler.onEarth = true;

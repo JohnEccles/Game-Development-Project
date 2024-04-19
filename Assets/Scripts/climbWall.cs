@@ -25,6 +25,8 @@ public class climbWall : MonoBehaviour
     private Vector3 forceDirection = Vector3.zero;
 
 
+    RaycastHit hit;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -44,6 +46,48 @@ public class climbWall : MonoBehaviour
     private void OnDisable()
     {
         playerActions.Player.Disable();
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerRB) 
+        {
+
+            /*
+            if (Physics.Raycast(playerRB.transform.position, -transform.up, out hit, 10000f))
+            {
+
+                // Works for no movement and up/down movement Not working for left/right movement
+
+                Quaternion rot = Quaternion.FromToRotation(playerRB.transform.up, hit.normal) * playerRB.transform.rotation;
+                playerRB.transform.rotation = Quaternion.Lerp(playerRB.transform.rotation, rot, Time.deltaTime);
+
+                rot = Quaternion.FromToRotation(playerRB.transform.up, hit.normal) * playerRB.transform.rotation;
+                playerRB.transform.rotation = Quaternion.Lerp(playerRB.transform.rotation, rot, Time.deltaTime);
+
+                //playerRB.transform.LookAt(transform.forward, hit.normal);
+
+            }
+            */
+
+            // Movement
+            // Horizontal
+            forceDirection += -transform.right.normalized * move.ReadValue<Vector2>().x * thirdPersonControler.climbForce;
+            // Vertical
+            forceDirection += Vector3.up * move.ReadValue<Vector2>().y * thirdPersonControler.climbForce;
+
+            playerRB.AddForce(forceDirection, ForceMode.Impulse);
+            forceDirection = Vector3.zero; // Stops Accleration after buttons not pressed
+
+            
+
+
+
+        }
+
+        
+
+
     }
 
 
@@ -72,7 +116,9 @@ public class climbWall : MonoBehaviour
 
             // Makes Player upsidedown
             //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
-            playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
+
+            //playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
+
             thirdPersonControler.onWall = true;
 
 

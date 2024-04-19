@@ -19,7 +19,7 @@ public class ThirdPersonControler : MonoBehaviour
     [SerializeField]
     private float jumpForce = 5f;
     [SerializeField]
-    private float climbForce = 0.5f;
+    public float climbForce = 0.5f;
     [SerializeField]
     private float maxSpeed = 5f;
     private Vector3 forceDirection = Vector3.zero;
@@ -75,7 +75,7 @@ public class ThirdPersonControler : MonoBehaviour
             forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce * 3;
             // Vertical
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce * 3;
-            Debug.Log($"{movementForce * 2}");
+            Debug.Log($"{movementForce * 3}");
 
             // Animation
             animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed );
@@ -93,10 +93,7 @@ public class ThirdPersonControler : MonoBehaviour
             // Camera controles direction allows for walking off wall if angled paralel
             //forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * climbForce;
 
-            forceDirection += move.ReadValue<Vector2>().x * Vector3.left * climbForce;
-
-            // Vertical
-            forceDirection += Vector3.up * move.ReadValue<Vector2>().y * climbForce;
+            
 
         }
         else
