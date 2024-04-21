@@ -237,6 +237,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b84679c5294a4448753764e73a82c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 616c612f-2413-44dd-9e19-4f3bb83eae67
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   movementForce: 30
   jumpForce: 200
   climbForce: 0.5
@@ -245,6 +254,7 @@ MonoBehaviour:
   onEarth: 0
   onWall: 0
   release: 0
+  animator: {fileID: 0}
 --- !u!54 &3530467640057288724
 Rigidbody:
   m_ObjectHideFlags: 0

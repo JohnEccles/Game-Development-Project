@@ -33,6 +33,9 @@ public class ThirdPersonControler : MonoBehaviour
     public bool onWall;
     public bool release;
 
+    [SerializeField]
+    private LayerMask Ground;
+
 
     // ANIMATION
     [SerializeField]
@@ -58,7 +61,7 @@ public class ThirdPersonControler : MonoBehaviour
     private void OnDisable()
     {
         playerActions.Player.Jump.started -= DoJump;
-        
+
         playerActions.Player.Disable();
     }
 
@@ -68,17 +71,17 @@ public class ThirdPersonControler : MonoBehaviour
         // Checks if run key held down
         isRunning = playerActions.Player.Run.ReadValue<float>() > 0;
         //Debug.Log($"{isRunning}");
-        if (isRunning && onEarth)
+        if (isRunning && onEarth && !onWall)
         {
             // Horizontal
-            
+
             forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce * 3;
             // Vertical
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce * 3;
             Debug.Log($"{movementForce * 3}");
 
             // Animation
-            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed );
+            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed);
         }
         // Climbing/Walking on a wall
         else if (onWall && !release)
@@ -87,17 +90,9 @@ public class ThirdPersonControler : MonoBehaviour
             animator.ResetTrigger("Falling");
             animator.SetTrigger("Grounded");
 
-            // Horizontal
-            // Reads value from UserInput Move and adds value along with camera pos and movement force
-
-            // Camera controles direction allows for walking off wall if angled paralel
-            //forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * climbForce;
-
-            
-
         }
         else
-        { 
+        {
             // Horizontal
             // Reads value from UserInput Move and adds value along with camera pos and movement force
             forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
@@ -105,13 +100,13 @@ public class ThirdPersonControler : MonoBehaviour
             forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
 
             // Animation
-            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed * 0.75f );
+            animator.SetFloat("Speed", rb.velocity.magnitude / maxSpeed * 0.75f);
 
         }
 
-       
+
         rb.AddForce(forceDirection, ForceMode.Impulse);
-        forceDirection= Vector3.zero; // Stops Accleration after buttons not pressed
+        forceDirection = Vector3.zero; // Stops Accleration after buttons not pressed
 
         // Check Jump
 
@@ -129,8 +124,8 @@ public class ThirdPersonControler : MonoBehaviour
         // Limmit Horizontal speed
         Vector3 horisontalVelocity = rb.velocity;
         horisontalVelocity.y = 0;
-        if(horisontalVelocity.sqrMagnitude > maxSpeed * maxSpeed) 
-        { 
+        if (horisontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
+        {
             rb.velocity = horisontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
         }
 
@@ -139,9 +134,10 @@ public class ThirdPersonControler : MonoBehaviour
             animator.ResetTrigger("Falling");
             animator.SetTrigger("Grounded");
         }
-        else if (!onEarth) 
+        else if (onWall)
         {
             animator.SetTrigger("Grounded");
+            animator.ResetTrigger("Falling");
         }
         else
         {
@@ -149,13 +145,16 @@ public class ThirdPersonControler : MonoBehaviour
             animator.ResetTrigger("Grounded");
         }
 
-        
+
 
         LookAt();
+
+        // Has some issues with oreientation check layers for items in Unity
+        GetGroundAngle();
     }
 
 
-    private void LookAt() 
+    private void LookAt()
     {
         Vector3 direction = rb.velocity;
         direction.y = 0f;
@@ -163,15 +162,21 @@ public class ThirdPersonControler : MonoBehaviour
         // Check for player Input && change direction if so
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f && onEarth)
         {
-            this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            this.rb.rotation = Quaternion.LookRotation(direction, this.transform.up);
+            
         }
         else if (onEarth)
-        {   
+        {
             // Stop rotatin if no input
-            rb.angularVelocity= Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        else
+        {
+            // Stop rotatin if no input
+            rb.angularVelocity = Vector3.zero;
         }
 
-       
+        
 
 
     }
@@ -196,15 +201,11 @@ public class ThirdPersonControler : MonoBehaviour
     private void DoJump(InputAction.CallbackContext obj)
     {
         Debug.Log($"{IsGrounded()}");
-        if (IsGrounded()) 
+        if (IsGrounded())
         {
             forceDirection += Vector3.up * jumpForce;
         }
-        else if (onWall)
-        {
-            print("WALL LEAP!!!!");
-            forceDirection -= move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * climbForce;
-        }
+
 
         // Animation
         animator.SetTrigger("Jump");
@@ -214,16 +215,29 @@ public class ThirdPersonControler : MonoBehaviour
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 2f)) 
+        if (Physics.Raycast(ray, out RaycastHit hit, 2f))
         {
-            return true; 
+            return true;
         }
         else
             return false;
     }
 
+    // https://www.youtube.com/watch?v=KFUygjZKD8E
+    void GetGroundAngle()
+    {
+        Vector3 direction = rb.velocity;
+        direction.y = 0f;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1, Ground))
+        {
+            Quaternion RotToGround = Quaternion.FromToRotation(this.rb.transform.up, hit.normal);
+                                                                                // Speed effects smoothness of rotation & LookAt command for TPC
+            this.rb.rotation = Quaternion.Slerp(this.rb.rotation, RotToGround * this.rb .rotation, 0.5f);
 
 
 
+        }
+    }
 
 }

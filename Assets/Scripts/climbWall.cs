@@ -1,8 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class climbWall : MonoBehaviour
 {
@@ -27,6 +29,11 @@ public class climbWall : MonoBehaviour
 
     RaycastHit hit;
 
+    GameObject collisionObject;
+    Quaternion rot;
+
+    [SerializeField]
+    private LayerMask Wall;
 
     // Start is called before the first frame update
     void Awake()
@@ -54,50 +61,51 @@ public class climbWall : MonoBehaviour
         {
 
             /*
-            if (Physics.Raycast(playerRB.transform.position, -transform.up, out hit, 10000f))
-            {
+            ///
+            // Works for up/down movement, lef/right movement has issues character
+            // Works for no movement and up/down movement Not working for left/right movement
+            Quaternion rot = Quaternion.FromToRotation(playerRB.transform.up, -this.transform.forward.normalized) * playerRB.rotation;
+            playerRB.transform.rotation = Quaternion.Lerp(playerRB.transform.rotation, rot, Time.deltaTime * 2);
 
-                // Works for no movement and up/down movement Not working for left/right movement
-
-                Quaternion rot = Quaternion.FromToRotation(playerRB.transform.up, hit.normal) * playerRB.transform.rotation;
-                playerRB.transform.rotation = Quaternion.Lerp(playerRB.transform.rotation, rot, Time.deltaTime);
-
-                rot = Quaternion.FromToRotation(playerRB.transform.up, hit.normal) * playerRB.transform.rotation;
-                playerRB.transform.rotation = Quaternion.Lerp(playerRB.transform.rotation, rot, Time.deltaTime);
-
-                //playerRB.transform.LookAt(transform.forward, hit.normal);
-
-            }
             */
 
-            // Movement
-            // Horizontal
-            forceDirection += -transform.right.normalized * move.ReadValue<Vector2>().x * thirdPersonControler.climbForce;
-            // Vertical
-            forceDirection += Vector3.up * move.ReadValue<Vector2>().y * thirdPersonControler.climbForce;
+            /*
+            if (rot != null) 
+            {
+                rot = Quaternion.FromToRotation(collisionObject.transform.up, -this.transform.forward.normalized) * collisionObject.transform.rotation;
+                collisionObject.transform.rotation = Quaternion.Lerp(collisionObject.transform.rotation, rot, Time.deltaTime * 2);
+            } 
+            */
 
-            playerRB.AddForce(forceDirection, ForceMode.Impulse);
+            GetWallAngle();
+
+            // Movement
+            playerRB.AddForce(this.transform.right.normalized * move.ReadValue<Vector2>().x * thirdPersonControler.climbForce, ForceMode.Impulse);
+            playerRB.AddForce(this.transform.up.normalized * move.ReadValue<Vector2>().y * thirdPersonControler.climbForce, ForceMode.Impulse);
             forceDirection = Vector3.zero; // Stops Accleration after buttons not pressed
 
-            
-
+            //if (!thirdPersonControler.onWall) GetWallAngle();
 
 
         }
-
-        
-
 
     }
 
 
     private void OnTriggerStay(Collider other)
     {
+        GetWallAngle();
+
+
         if (release) 
         { 
             other.attachedRigidbody.useGravity = !other.attachedRigidbody.useGravity;
             //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
-            playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
+
+            collisionObject.transform.rotation = Quaternion.FromToRotation(transform.up, Vector3.up);
+
+            playerRB.AddForce(-this.transform.forward*thirdPersonControler.climbForce*3,ForceMode.Impulse);
+
         }
         
 
@@ -109,44 +117,44 @@ public class climbWall : MonoBehaviour
         if (other.GetComponent<Rigidbody>() && other.CompareTag("Player"))
         {
             playerRB = other.attachedRigidbody;
+            collisionObject = other.gameObject;
+
+            GetWallAngle();
 
             playerRB.useGravity = false;
 
             //other.transform.SetParent(transform);
 
-            // Makes Player upsidedown
-            //playerRB.rotation = Quaternion.LookRotation(transform.forward, lookDirection);
-
-            //playerRB.rotation = Quaternion.LookRotation(transform.forward, -transform.forward);
-
             thirdPersonControler.onWall = true;
-
-
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
+        
         if (other.GetComponent<Rigidbody>() && other.CompareTag("Player"))
         {
+            
+
             playerRB.useGravity = true;
 
-            Vector3 direction = playerRB.velocity;
-            direction.y = 0f;
-            playerRB.rotation = Quaternion.LookRotation(direction, -lookDirection);
-
+            collisionObject.transform.rotation = Quaternion.FromToRotation(transform.up, Vector3.up);
 
             //other.transform.SetParent(null);
 
             // MUST BE LAST
             playerRB = null;
+
+            release = false;
+            thirdPersonControler.onWall = false;
+
             
 
         }
 
-        release = false;
-        thirdPersonControler.onWall = false;
+        
+
+
 
     }
 
@@ -155,4 +163,15 @@ public class climbWall : MonoBehaviour
         release = !release;
     }
 
+
+    // From https://www.youtube.com/watch?v=KFUygjZKD8E
+    void GetWallAngle()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(collisionObject.transform.position, transform.TransformDirection(Vector3.forward), out hit, 5, Wall))
+        {
+            Quaternion RotToWall = Quaternion.FromToRotation(collisionObject.transform.up, hit.normal);
+            collisionObject.transform.rotation = Quaternion.Slerp(collisionObject.transform.rotation, RotToWall * collisionObject.transform.rotation, 10);
+        }
+    }
 }
