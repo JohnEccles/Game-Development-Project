@@ -149,21 +149,32 @@ public class ThirdPersonControler : MonoBehaviour
 
         LookAt();
 
-        // Has some issues with oreientation check layers for items in Unity
-        GetGroundAngle();
+        // Has some issues
+        //GetGroundAngle();
     }
 
 
     private void LookAt()
     {
         Vector3 direction = rb.velocity;
-        direction.y = 0f;
+        //direction.y = 0f;
+        RaycastHit hit;
 
+        
+        
         // Check for player Input && change direction if so
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f && onEarth)
         {
-            this.rb.rotation = Quaternion.LookRotation(direction, this.transform.up);
-            
+            this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            //this.rb.rotation = Quaternion.Slerp(this.rb.rotation, Quaternion.LookRotation(direction, Vector3.up), 1.0f);
+
+            if (Physics.Raycast(this.rb.transform.position, this.rb.transform.TransformDirection(Vector3.down), out hit, 1, Ground) && move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
+            {
+                Quaternion RotToWall = Quaternion.FromToRotation(this.rb.transform.up, hit.normal);
+                this.rb.rotation = Quaternion.Slerp(Quaternion.LookRotation(direction, Vector3.up), RotToWall * this.rb.rotation, 1.0f);
+            }
+
+
         }
         else if (onEarth)
         {
@@ -229,14 +240,11 @@ public class ThirdPersonControler : MonoBehaviour
         Vector3 direction = rb.velocity;
         direction.y = 0f;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1, Ground))
+        
+        if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), out hit, 5, Ground))
         {
-            Quaternion RotToGround = Quaternion.FromToRotation(this.rb.transform.up, hit.normal);
-                                                                                // Speed effects smoothness of rotation & LookAt command for TPC
-            this.rb.rotation = Quaternion.Slerp(this.rb.rotation, RotToGround * this.rb .rotation, 0.5f);
-
-
-
+            Quaternion RotToWall = Quaternion.FromToRotation(this.transform.up, hit.normal);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, RotToWall * this.transform.rotation, 0.5f);
         }
     }
 
