@@ -168,7 +168,7 @@ public class ThirdPersonControler : MonoBehaviour
             this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
             //this.rb.rotation = Quaternion.Slerp(this.rb.rotation, Quaternion.LookRotation(direction, Vector3.up), 1.0f);
 
-            if (Physics.Raycast(this.rb.transform.position, this.rb.transform.TransformDirection(Vector3.down), out hit, 1, Ground) && rb.velocity.y == 0f)
+            if (Physics.Raycast(this.rb.transform.position, this.rb.transform.TransformDirection(Vector3.down), out hit, 1, Ground) && IsGrounded())
             {
                 Quaternion RotToWall = Quaternion.FromToRotation(this.rb.transform.up, hit.normal);
                 this.rb.rotation = Quaternion.Slerp(Quaternion.LookRotation(direction, Vector3.up), RotToWall * this.rb.rotation, 1.0f);
