@@ -27,7 +27,7 @@ public class movingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         ///*
         
@@ -58,76 +58,5 @@ public class movingPlatform : MonoBehaviour
         */
 
     }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        Debug.Log("UEWOQEUOQWEQWEQEW");
-
-        if (other.transform.tag == "Player")
-        {
-            //other.transform.SetParent(this.transform);
-            
-
-            //  ---> "false" will disable resizing the player?
-            other.transform.SetParent(transform, true);
-
-
-        }
-
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "Player")
-        {
-            other.transform.SetParent(null);
-        }
-    }
-
-
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("QWETUQWTEIQWE");
-        if (other.transform.tag == "Player") 
-        {
-            Debug.Log("ENTER IF");
-            other.transform.parent = transform;
-        }
-
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("JASDJLSADADS");
-        if (other.transform.tag == "Player")
-        {
-            Debug.Log("Exit IF");
-            other.transform.parent = null;
-        }
-    }
-    */
-
-    /*
-    // Stick player to platform
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.transform.tag == "Player")
-        {
-            other.transform.parent = transform;
-        }
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.transform.tag == "Player")
-        {
-            other.transform.parent = null;
-        }
-    }
-    */
-
 
 }
