@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8013354359935056047}
   - component: {fileID: 2935458382054539955}
   - component: {fileID: 5009218846494432991}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ClimbWallBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 1938531516825461706}
   - component: {fileID: 3693229988445732538}
   - component: {fileID: 9008359609088141967}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ClimbWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,3 +174,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thirdPersonControler: {fileID: 0}
   lookDirection: {x: 0, y: 0, z: 0}
+  Wall:
+    serializedVersion: 2
+    m_Bits: 256
