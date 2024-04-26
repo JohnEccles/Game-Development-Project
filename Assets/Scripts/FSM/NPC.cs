@@ -11,6 +11,9 @@ public class NPC: MonoBehaviour
     public AttackState m_attackTargetState;
     public Transform[] m_patrolPoints;
     public PatrolState m_patrolState;
+
+    private Transform attackTarget;
+
     void Start()
     {
         m_navAgent = GetComponent<NavMeshAgent>();
@@ -25,6 +28,42 @@ public class NPC: MonoBehaviour
     {
         if (m_stateMachine != null && m_stateMachine.currentState != null)
             m_stateMachine.currentState.DrawGizmos();
+    }
+
+    ///*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            m_attackTargetState.SetTargetTransform(other.transform);
+            m_stateMachine.ChangeState(m_attackTargetState);
+        }
+    }
+    //*/
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player") 
+        {
+            m_stateMachine.ChangeState(m_attackTargetState);
+        }
+            
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player") 
+        {
+            m_stateMachine.ChangeState(m_patrolState);
+        }
+            
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player")
+            print("PUNCH!");
+            
     }
 
 }
