@@ -37,15 +37,17 @@ public class AttackState: BaseState
         // Attack state
         base.UpdateLogic();
 
-        Debug.Log("BLOIRKAJHSDSD");
+        //Debug.Log("BLOIRKAJHSDSD");
+
         m_currentNPC.m_navAgent.SetDestination(m_targetTransform.position);
 
 
         // Works wrong?
-        if (m_currentNPC != null || m_targetTransform != null)
+        if (m_currentNPC == null || m_targetTransform == null)
             return;
+        
+        //Debug.Log("KUSHARARWAWBLABLALB");
 
-        Debug.Log("KUSHARARWAWBLABLALB");
         m_currentNPC.m_navAgent.SetDestination(m_targetTransform.position);
         
         /*
