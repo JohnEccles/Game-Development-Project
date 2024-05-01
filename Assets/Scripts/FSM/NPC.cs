@@ -48,22 +48,15 @@ public class NPC: MonoBehaviour
 
         // Animation
         animator.SetFloat("Speed", patrolSpeed);
+
+        m_stateMachine.currentState.DrawGizmos();
     }
     private void OnDrawGizmos()
     {
-        //print(this.name.ToString());
-        //print(this.m_stateMachine.ToString());
-        //print(this.m_stateMachine.currentState.ToString()); // Causes error object not set to instance of an object
-        //print(this.m_stateMachine.currentState);
-
+     
         if (m_stateMachine != null && m_stateMachine.currentState != null) 
         {
             m_stateMachine.currentState.DrawGizmos();
-            
-            print(this.name.ToString());
-            print(this.m_stateMachine.ToString());
-            print(this.m_stateMachine.currentState.ToString()); // Causes error object not set to instance of an object
-            print(this.m_stateMachine.currentState);
         }
             
     }
@@ -158,6 +151,9 @@ public class NPC: MonoBehaviour
     private void LeaveAttackState()
     {
         m_stateMachine.ChangeState(m_patrolState);
+
+        attackTarget = null;
+
         // Animation
         animator.SetFloat("Speed", patrolSpeed);
     }
