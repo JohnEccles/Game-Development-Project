@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2484925780415245747
+--- !u!1 &5089427359938221419
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2867357613997675302}
+  - component: {fileID: 278403094263607138}
   m_Layer: 0
-  m_Name: Corridoor
+  m_Name: Coridoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2867357613997675302
+--- !u!4 &278403094263607138
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2484925780415245747}
+  m_GameObject: {fileID: 5089427359938221419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.999712, y: 1.2140594, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6766145365000454755}
-  - {fileID: 1129704444053030178}
-  - {fileID: 6435753539767091123}
-  - {fileID: 1617966219734187371}
-  - {fileID: 1791212573021748252}
+  - {fileID: 1653997100874770975}
+  - {fileID: 5086599909756960005}
+  - {fileID: 7698318155090952684}
+  - {fileID: 5148836415818970406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4242924475046785661
+--- !u!1001 &995897616335663602
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2867357613997675302}
+    m_TransformParent: {fileID: 278403094263607138}
     m_Modifications:
     - target: {fileID: 3339267718180264520, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_Name
-      value: RoomTwinWall (6)
+      value: RoomTwinWall (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -62,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -104,24 +103,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ea89693ab9f5144bf5b7892f90b49d, type: 3}
---- !u!4 &6766145365000454755 stripped
+--- !u!4 &7698318155090952684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
     type: 3}
-  m_PrefabInstance: {fileID: 4242924475046785661}
+  m_PrefabInstance: {fileID: 995897616335663602}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4492247956123865005
+--- !u!1001 &2338387973022106936
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2867357613997675302}
+    m_TransformParent: {fileID: 278403094263607138}
     m_Modifications:
     - target: {fileID: 3339267718180264520, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_Name
-      value: RoomTwinWall (9)
+      value: RoomTwinWall (4)
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -178,24 +177,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ea89693ab9f5144bf5b7892f90b49d, type: 3}
---- !u!4 &6435753539767091123 stripped
+--- !u!4 &5148836415818970406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
     type: 3}
-  m_PrefabInstance: {fileID: 4492247956123865005}
+  m_PrefabInstance: {fileID: 2338387973022106936}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7541924349864670524
+--- !u!1001 &2418700880831548699
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2867357613997675302}
+    m_TransformParent: {fileID: 278403094263607138}
     m_Modifications:
     - target: {fileID: 3339267718180264520, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_Name
-      value: RoomTwinWall (7)
+      value: RoomTwinWall (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -210,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -252,24 +251,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ea89693ab9f5144bf5b7892f90b49d, type: 3}
---- !u!4 &1129704444053030178 stripped
+--- !u!4 &5086599909756960005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
     type: 3}
-  m_PrefabInstance: {fileID: 7541924349864670524}
+  m_PrefabInstance: {fileID: 2418700880831548699}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8175128146369908085
+--- !u!1001 &8211158958796298753
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2867357613997675302}
+    m_TransformParent: {fileID: 278403094263607138}
     m_Modifications:
     - target: {fileID: 3339267718180264520, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_Name
-      value: RoomTwinWall (8)
+      value: RoomTwinWall (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -284,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: 14.799286
       objectReference: {fileID: 0}
     - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
         type: 3}
@@ -326,83 +325,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92ea89693ab9f5144bf5b7892f90b49d, type: 3}
---- !u!4 &1617966219734187371 stripped
+--- !u!4 &1653997100874770975 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
     type: 3}
-  m_PrefabInstance: {fileID: 8175128146369908085}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &9213347034778029058
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2867357613997675302}
-    m_Modifications:
-    - target: {fileID: 3339267718180264520, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_Name
-      value: RoomTwinWall (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 92ea89693ab9f5144bf5b7892f90b49d, type: 3}
---- !u!4 &1791212573021748252 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7424122447906697246, guid: 92ea89693ab9f5144bf5b7892f90b49d,
-    type: 3}
-  m_PrefabInstance: {fileID: 9213347034778029058}
+  m_PrefabInstance: {fileID: 8211158958796298753}
   m_PrefabAsset: {fileID: 0}
