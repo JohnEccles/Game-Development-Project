@@ -37,17 +37,26 @@ public class AttackState: BaseState
         // Attack state
         base.UpdateLogic();
 
-        if (m_currentNPC != null || m_targetTransform != null)
+        //Debug.Log("BLOIRKAJHSDSD");
+
+        m_currentNPC.m_navAgent.SetDestination(m_targetTransform.position);
+
+
+        // Works wrong?
+        if (m_currentNPC == null || m_targetTransform == null)
             return;
+        
+        //Debug.Log("KUSHARARWAWBLABLALB");
 
         m_currentNPC.m_navAgent.SetDestination(m_targetTransform.position);
         
+        /*
         if(m_currentNPC.m_navAgent.remainingDistance < 5)
         {
             m_currentNPC.m_stateMachine.ChangeState(m_currentNPC.m_patrolState);
             return;
         }
-
+        */
 
 
     }
