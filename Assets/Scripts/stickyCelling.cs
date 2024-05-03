@@ -50,7 +50,7 @@ public class stickyCelling : MonoBehaviour
             direction.y = 0f;
             if (thirdPersonControler.move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
             {
-                playerRB.rotation = Quaternion.LookRotation(direction, lookDirection);
+                playerRB.rotation = Quaternion.LookRotation(direction, -this.transform.up);
                 
             }
             else 

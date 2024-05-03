@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7232429877838064184
+--- !u!1 &4211870806541090525
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4888111381949395323}
-  - component: {fileID: 6767392709138243135}
-  - component: {fileID: 2350401920367106966}
-  m_Layer: 8
-  m_Name: ClimbWall
+  - component: {fileID: 3988085051740730446}
+  - component: {fileID: 3263181062751762497}
+  - component: {fileID: 4648727831311706703}
+  m_Layer: 0
+  m_Name: SpinPlatformCenterY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4888111381949395323
+--- !u!4 &3988085051740730446
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7232429877838064184}
+  m_GameObject: {fileID: 4211870806541090525}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45, y: 5.08, z: 0.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 22.18, y: 5.45, z: 33.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8648511988978919272}
+  - {fileID: 4132831734285401350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6767392709138243135
+--- !u!65 &3263181062751762497
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7232429877838064184}
+  m_GameObject: {fileID: 4211870806541090525}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -53,26 +53,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 24, y: 10, z: 2.53}
-  m_Center: {x: 0, y: -0.34, z: -1.52}
---- !u!114 &2350401920367106966
+  m_Size: {x: 19.53, y: 0.6, z: 6.87}
+  m_Center: {x: 0, y: 0.79, z: 0}
+--- !u!114 &4648727831311706703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7232429877838064184}
+  m_GameObject: {fileID: 4211870806541090525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73e3bde3b10ede64eb948da0f60ae978, type: 3}
+  m_Script: {fileID: 11500000, guid: 92229c7891b259746b4efa8e90894de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonControler: {fileID: 0}
-  lookDirection: {x: 0, y: 0, z: 0}
-  Wall:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!1 &9213707886561698403
+  xRotation: 0
+  yRotation: 5
+  zRotation: 0
+--- !u!1 &5817010235156060873
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,47 +78,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8648511988978919272}
-  - component: {fileID: 1752055365637086913}
-  - component: {fileID: 3041035723988070185}
-  - component: {fileID: 7003332256266200293}
-  m_Layer: 8
-  m_Name: ClimbWallBody
-  m_TagString: Untagged
+  - component: {fileID: 4132831734285401350}
+  - component: {fileID: 6040534222018843774}
+  - component: {fileID: 2210625565422276258}
+  - component: {fileID: 3149685465410433107}
+  m_Layer: 6
+  m_Name: SpinPlatformBody
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8648511988978919272
+--- !u!4 &4132831734285401350
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213707886561698403}
+  m_GameObject: {fileID: 5817010235156060873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.35, z: 0}
-  m_LocalScale: {x: 24, y: 10, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00017745013}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 19.037987, y: 1.3058, z: 6.443608}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4888111381949395323}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1752055365637086913
+  m_Father: {fileID: 3988085051740730446}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.02, z: 0}
+--- !u!33 &6040534222018843774
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213707886561698403}
+  m_GameObject: {fileID: 5817010235156060873}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3041035723988070185
+--- !u!23 &2210625565422276258
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213707886561698403}
+  m_GameObject: {fileID: 5817010235156060873}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -134,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b6df0cc96e05434782deabee9832b95, type: 2}
+  - {fileID: 2100000, guid: 88011c960a613704cb9f76e6a3f1026d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,14 +154,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7003332256266200293
+--- !u!65 &3149685465410433107
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213707886561698403}
-  m_Material: {fileID: 0}
+  m_GameObject: {fileID: 5817010235156060873}
+  m_Material: {fileID: 13400000, guid: a205d3bfd7e9ef74b847f60bebfa2c51, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -175,5 +173,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.11}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
