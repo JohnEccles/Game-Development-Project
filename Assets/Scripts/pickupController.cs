@@ -11,18 +11,24 @@ public class pickupController : MonoBehaviour
     private DefaultPlayerActions playerActions;
 
     [SerializeField]
-    Transform holdArea;
-    private GameObject heldObj;
-    private Rigidbody heldObjRB;
+    public Transform holdArea;
+    public GameObject heldObj;
+    public Rigidbody heldObjRB;
 
     [SerializeField]
     private float pickupRange = 5.0f;
     [SerializeField]
     private float pickupForce = 150.0f;
+    [SerializeField]
+    public float moveSpeed;
+
 
     private bool wasPressed;
     private bool wasReleased;
 
+
+    [SerializeField]
+    private ThirdPersonControler thirdPersonControler;
 
     private void Awake()
     {
@@ -51,16 +57,39 @@ public class pickupController : MonoBehaviour
             // Move Object
             moveObject();
         }
+        if (thirdPersonControler.onWall) 
+        {
+            dropObject();
+        }
     }
 
 
     void moveObject() 
     {
-        if (Vector3.Distance(heldObj.transform.position, holdArea.position) > heldObj.transform.localScale.magnitude ) 
+        if (Vector3.Distance(heldObj.transform.localPosition, holdArea.position) > heldObj.transform.localScale.magnitude ) 
         {
-            Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+            if (!thirdPersonControler.onWall)
+            {
+                print("NOT ON WALL?");
+                Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+                heldObjRB.AddForce(moveDirection * pickupForce);
+            }
+            else if (thirdPersonControler.onWall) 
+            {
 
-            heldObjRB.AddForce(moveDirection * pickupForce);
+                // THIS SORT OF WORKS
+                //heldObj.transform.position = Vector3.MoveTowards(heldObj.transform.position, holdArea.position, Vector3.Distance(heldObj.transform.localPosition, holdArea.position));
+
+                //heldObj.transform.localPosition = Vector3.Lerp(heldObj.transform.localPosition, holdArea.localPosition, moveSpeed);
+                //heldObj.transform.position = Vector3.Lerp(heldObj.transform.localPosition, holdArea.position, moveSpeed);
+
+                //heldObj.transform.position += holdArea.transform.position - heldObj.transform.position;
+
+
+                heldObj.transform.position += holdArea.position - heldObj.transform.position;
+                heldObj.transform.rotation = Quaternion.Euler(0.0f, 0.0f, holdArea.transform.rotation.z * -1.0f);
+
+            }
     
         }
     }
@@ -78,6 +107,8 @@ public class pickupController : MonoBehaviour
             heldObjRB.drag = 10;
 
             heldObjRB.constraints = RigidbodyConstraints.FreezeRotation ;
+
+
 
             heldObj.transform.SetParent(holdArea.transform);
 

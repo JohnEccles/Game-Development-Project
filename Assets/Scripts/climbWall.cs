@@ -12,6 +12,8 @@ public class climbWall : MonoBehaviour
     // Get Player TPCC object and apply
     [SerializeField]
     private ThirdPersonControler thirdPersonControler;
+    [SerializeField]
+    private pickupController pickupController;
 
     private Rigidbody playerRB;
 
@@ -83,6 +85,9 @@ public class climbWall : MonoBehaviour
             playerRB.AddForce(this.transform.right.normalized * move.ReadValue<Vector2>().x * thirdPersonControler.climbForce, ForceMode.Impulse);
             playerRB.AddForce(this.transform.up.normalized * move.ReadValue<Vector2>().y * thirdPersonControler.climbForce, ForceMode.Impulse);
             forceDirection = Vector3.zero; // Stops Accleration after buttons not pressed
+
+            
+
 
             //if (!thirdPersonControler.onWall) GetWallAngle();
 
