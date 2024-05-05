@@ -12,7 +12,7 @@ public class climbWall : MonoBehaviour
     // Get Player TPCC object and apply
     [SerializeField]
     private ThirdPersonControler thirdPersonControler;
-    [SerializeField]
+    //[SerializeField]
     private pickupController pickupController;
 
     private Rigidbody playerRB;
