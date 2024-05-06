@@ -180,12 +180,14 @@ public class ThirdPersonControler : MonoBehaviour
         {
             // Stop rotatin if no input
             rb.angularVelocity = Vector3.zero;
+            if (Physics.Raycast(this.rb.transform.position, this.rb.transform.TransformDirection(Vector3.down), out hit, 1, Ground) && IsGrounded())
+            {
+                Quaternion RotToWall = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                this.rb.rotation = Quaternion.Slerp(Quaternion.LookRotation(direction, Vector3.up), RotToWall * this.rb.rotation, 1.0f);
+            }
         }
-        else
-        {
-            // Stop rotatin if no input
-            rb.angularVelocity = Vector3.zero;
-        }
+        
+        
 
         
 

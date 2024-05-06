@@ -28,8 +28,11 @@ public class NPC: MonoBehaviour
     private float patrolSpeed;
     private float chaseSpeed;
 
+    [SerializeField]
+    private float launchForce;
 
-    
+
+
 
     void Start()
     {
@@ -41,10 +44,13 @@ public class NPC: MonoBehaviour
         m_stateMachine.ChangeState(m_patrolState);
 
 
+
         //print(this.name.ToString() + ", " + this.m_stateMachine.currentState.ToString());
 
         patrolSpeed = m_navAgent.speed / (m_navAgent.speed * 2);
         chaseSpeed = m_navAgent.speed / m_navAgent.speed;
+
+        //launchForce = 10;
 
         // Animation
         animator.SetFloat("Speed", patrolSpeed);
@@ -128,8 +134,18 @@ public class NPC: MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player") 
+        {
             print("PUNCH!");
+
+            //collision.gameObject.GetComponent<Rigidbody>().AddForce( (Vector3.up + Vector3.forward).normalized * launchForce, ForceMode.Impulse);
+
+            //collision.gameObject.GetComponent<Rigidbody>().AddForce((this.transform.up + this.transform.forward).normalized * launchForce, ForceMode.Impulse);
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce((this.transform.forward).normalized * launchForce, ForceMode.Impulse);
+
+        }
+            
             
     }
 
