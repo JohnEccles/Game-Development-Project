@@ -28,7 +28,7 @@ public class playerAttatch : MonoBehaviour
     {
         Debug.Log("SHLORP");
 
-        if (other.gameObject == player) 
+        if (other.gameObject.tag == "Player") 
         {
             player.transform.SetParent(transform);
 
@@ -41,7 +41,7 @@ public class playerAttatch : MonoBehaviour
     {
         Debug.Log("LORSHEP");
 
-        if (other.gameObject == player)
+        if (other.gameObject.tag == "Player")
         {
             player.transform.SetParent(null);
         }

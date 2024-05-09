@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
+
+// Class based on code from the following tutorial https://www.youtube.com/watch?v=WIl6ysorTE0
 public class ThirdPersonControler : MonoBehaviour
 {
     // input
