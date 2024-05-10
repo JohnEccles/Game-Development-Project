@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
 
-// Class based on code from the following tutorial https://www.youtube.com/watch?v=WIl6ysorTE0
+// Class based on code from the following tutorial https://www.youtube.com/watch?v=WIl6ysorTE0 & https://github.com/onewheelstudio/Adventures-in-C-Sharp/tree/main/3rd%20Person%20Tutorial
 public class ThirdPersonControler : MonoBehaviour
 {
     // input
