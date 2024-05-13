@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
+using UnityEngine.UI;
+using TMPro;
 
 
 // Class based on code from the following tutorial https://www.youtube.com/watch?v=WIl6ysorTE0 & https://github.com/onewheelstudio/Adventures-in-C-Sharp/tree/main/3rd%20Person%20Tutorial
@@ -43,12 +47,27 @@ public class ThirdPersonControler : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+
+    [SerializeField]
+    public int maxHealth;
+    public int health;
+    private bool contact;
+
+    // Display health on UI
+    [SerializeField]
+    public TextMeshProUGUI scoreText;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         playerActions = new DefaultPlayerActions();
         isRunning = false;
         onEarth = true;
+
+        health = maxHealth;
+        contact = false;
+
+        
 
     }
 
@@ -162,8 +181,8 @@ public class ThirdPersonControler : MonoBehaviour
         //direction.y = 0f;
         RaycastHit hit;
 
-        
-        
+
+
         // Check for player Input && change direction if so
         if (move.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f && onEarth)
         {
@@ -188,11 +207,14 @@ public class ThirdPersonControler : MonoBehaviour
                 this.rb.rotation = Quaternion.Slerp(Quaternion.LookRotation(direction, Vector3.up), RotToWall * this.rb.rotation, 1.0f);
             }
         }
-        
-        
 
-        
 
+
+        // Check health
+        if (health <= 0f)
+        {
+            Die();
+        }
 
     }
 
@@ -244,12 +266,51 @@ public class ThirdPersonControler : MonoBehaviour
         Vector3 direction = rb.velocity;
         direction.y = 0f;
         RaycastHit hit;
-        
+
         if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), out hit, 5, Ground))
         {
             Quaternion RotToWall = Quaternion.FromToRotation(this.transform.up, hit.normal);
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, RotToWall * this.transform.rotation, 0.5f);
         }
     }
+
+
+    // Enemy and Health check
+  
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("THE PLAYER HAS BEEN TOUCHED");
+        if (collision.gameObject.tag == "Enemy" && !contact)
+        {
+            health -= 1;
+            contact = true;
+            UpdateHealthUI();
+        } 
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        print("THE PLAYER IS NOT TOUCHED");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            contact = false;
+        }
+    }
+
+    private void UpdateHealthUI()
+    {
+        scoreText.SetText( health.ToString() );
+    }
+
+    void Die()
+    {
+        // Reload scene on player death
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
+
 
 }
