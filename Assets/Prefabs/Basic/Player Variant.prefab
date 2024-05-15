@@ -130,6 +130,11 @@ PrefabInstance:
       objectReference: {fileID: 1413003900925664231}
     - target: {fileID: 6465701088381632396, guid: 2979ffd17271d834ca9ad17840f39547,
         type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465701088381632396, guid: 2979ffd17271d834ca9ad17840f39547,
+        type: 3}
       propertyPath: climbForce
       value: 5
       objectReference: {fileID: 0}

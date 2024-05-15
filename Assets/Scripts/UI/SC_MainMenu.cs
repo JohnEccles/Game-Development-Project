@@ -8,6 +8,7 @@ public class SC_MainMenu : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject CreditsMenu;
+    public GameObject LevelMenu;
 
     [SerializeField]
     string loadScene;
@@ -24,11 +25,24 @@ public class SC_MainMenu : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene);
     }
 
+    public void PlayTutorial()
+    {
+        // Play Now Button has been pressed, here you can initialize your game (For example Load a Scene called GameLevel etc.)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TutorialLevel");
+    }
+
+    public void PlayLevel1()
+    {
+        // Play Now Button has been pressed, here you can initialize your game (For example Load a Scene called GameLevel etc.)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level 1");
+    }
+
     public void CreditsButton()
     {
         // Show Credits Menu
         MainMenu.SetActive(false);
         CreditsMenu.SetActive(true);
+        LevelMenu.SetActive(false);
     }
 
     public void MainMenuButton()
@@ -36,6 +50,14 @@ public class SC_MainMenu : MonoBehaviour
         // Show Main Menu
         MainMenu.SetActive(true);
         CreditsMenu.SetActive(false);
+        LevelMenu.SetActive(false);
+    }
+
+    public void LevelButton()
+    {
+        MainMenu.SetActive(false);
+        CreditsMenu.SetActive(false);
+        LevelMenu.SetActive(true);
     }
 
     public void QuitButton()
