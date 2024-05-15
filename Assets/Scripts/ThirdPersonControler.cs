@@ -60,6 +60,13 @@ public class ThirdPersonControler : MonoBehaviour
     [SerializeField]
     string loadScene;
 
+
+    private InputAction openMenue;
+
+    public GameObject MainMenu;
+    [SerializeField]
+    public Button firstButtonMain;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -70,7 +77,7 @@ public class ThirdPersonControler : MonoBehaviour
         health = maxHealth;
         contact = false;
 
-        
+        openMenue = playerActions.UI.OpenMenu;
 
     }
 
@@ -79,12 +86,18 @@ public class ThirdPersonControler : MonoBehaviour
         playerActions.Player.Jump.started += DoJump;
 
         move = playerActions.Player.Move;
+
+
+        playerActions.UI.Enable();
+
         playerActions.Player.Enable();
     }
 
     private void OnDisable()
     {
         playerActions.Player.Jump.started -= DoJump;
+
+        playerActions.UI.Disable();
 
         playerActions.Player.Disable();
     }
@@ -175,6 +188,26 @@ public class ThirdPersonControler : MonoBehaviour
 
         // Has some issues
         //GetGroundAngle();
+
+
+        // Open menu?
+        // openMenue.pressed()?
+        if (openMenue.triggered) 
+        {
+            print("THE SNAKES ARE HERE!");
+            if (MainMenu.activeSelf != true)
+            {
+                MainMenu.SetActive(true);
+                firstButtonMain.Select();
+            }
+            else 
+            {
+                MainMenu.SetActive(false);
+            }
+            
+        }
+
+
     }
 
 
