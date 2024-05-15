@@ -57,6 +57,9 @@ public class ThirdPersonControler : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI scoreText;
 
+    [SerializeField]
+    string loadScene;
+
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -305,7 +308,7 @@ public class ThirdPersonControler : MonoBehaviour
     void Die()
     {
         // Reload scene on player death
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene);
 
         //UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 

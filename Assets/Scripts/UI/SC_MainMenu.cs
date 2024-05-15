@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 // Source https://www.sharpcoderblog.com/blog/unity-3d-create-main-menu-with-ui-canvas 
 public class SC_MainMenu : MonoBehaviour
@@ -12,6 +14,21 @@ public class SC_MainMenu : MonoBehaviour
 
     [SerializeField]
     string loadScene;
+
+    [SerializeField]
+    public Button firstButtonMain;
+    [SerializeField]
+    public Button firstButtonCredits;
+    [SerializeField]
+    public Button firstButtonLevels;
+
+    EventSystem m_EventSystem;
+
+    private void OnEnable()
+    {
+        m_EventSystem = EventSystem.current;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +60,9 @@ public class SC_MainMenu : MonoBehaviour
         MainMenu.SetActive(false);
         CreditsMenu.SetActive(true);
         LevelMenu.SetActive(false);
+
+        m_EventSystem.SetSelectedGameObject(firstButtonCredits.GameObject());
+
     }
 
     public void MainMenuButton()
@@ -51,6 +71,8 @@ public class SC_MainMenu : MonoBehaviour
         MainMenu.SetActive(true);
         CreditsMenu.SetActive(false);
         LevelMenu.SetActive(false);
+
+        m_EventSystem.SetSelectedGameObject(firstButtonMain.GameObject());
     }
 
     public void LevelButton()
@@ -58,6 +80,8 @@ public class SC_MainMenu : MonoBehaviour
         MainMenu.SetActive(false);
         CreditsMenu.SetActive(false);
         LevelMenu.SetActive(true);
+
+        m_EventSystem.SetSelectedGameObject(firstButtonLevels.GameObject());
     }
 
     public void QuitButton()

@@ -8090,7 +8090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152874704}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.073050715, y: 0.20321846, z: -0.48047432, w: 0.850006}
+  m_LocalRotation: {x: 0.07245092, y: 0.20171133, z: -0.47972026, w: 0.8508418}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19382,7 +19382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27116877, y: 0.013964679, z: -0.0039346395, w: 0.9624225}
+  m_LocalRotation: {x: 0.27117604, y: 0.012064342, z: -0.003399207, w: 0.9624482}
   m_LocalPosition: {x: -85.44, y: 14.76, z: -113.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -135537,6 +135537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 5.604925
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498586413861223790, guid: 205e8803c7b0fd44b919bdcbf10f02e3,
+        type: 3}
+      propertyPath: loadScene
+      value: GameOver-Level 1
       objectReference: {fileID: 0}
     - target: {fileID: 5498586413861223790, guid: 205e8803c7b0fd44b919bdcbf10f02e3,
         type: 3}
