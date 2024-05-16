@@ -87,6 +87,7 @@ public class ThirdPersonControler : MonoBehaviour
 
         move = playerActions.Player.Move;
 
+        playerActions.UI.OpenMenu.started += OpenMenu;
 
         playerActions.UI.Enable();
 
@@ -97,10 +98,14 @@ public class ThirdPersonControler : MonoBehaviour
     {
         playerActions.Player.Jump.started -= DoJump;
 
+        playerActions.UI.OpenMenu.started -= OpenMenu;
+
         playerActions.UI.Disable();
 
         playerActions.Player.Disable();
     }
+
+    
 
     private void FixedUpdate()
     {
@@ -190,22 +195,7 @@ public class ThirdPersonControler : MonoBehaviour
         //GetGroundAngle();
 
 
-        // Open menu?
-        // openMenue.pressed()?
-        if (openMenue.triggered) 
-        {
-            print("THE SNAKES ARE HERE!");
-            if (MainMenu.activeSelf != true)
-            {
-                MainMenu.SetActive(true);
-                firstButtonMain.Select();
-            }
-            else 
-            {
-                MainMenu.SetActive(false);
-            }
-            
-        }
+        
 
 
     }
@@ -344,6 +334,23 @@ public class ThirdPersonControler : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(loadScene);
 
         //UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
+
+    private void OpenMenu(InputAction.CallbackContext obj) 
+    {
+
+        print("THE SNAKES WONT BE HERE!");
+        if (MainMenu.activeSelf != true)
+        {
+            MainMenu.SetActive(true);
+            firstButtonMain.Select();
+        }
+        else
+        {
+            MainMenu.SetActive(false);
+        }
 
     }
 

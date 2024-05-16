@@ -29,6 +29,12 @@ public class SC_GameMenu : MonoBehaviour
         GameMenu.SetActive(false);
     }
 
+    public void MainMenuButton()
+    {
+        // Play Now Button has been pressed, here you can initialize your game (For example Load a Scene called GameLevel etc.)
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
+    }
+
     public void QuitButton()
     {
         // Quit Game
